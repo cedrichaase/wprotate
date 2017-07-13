@@ -2,10 +2,12 @@ const wallpaper = require('wallpaper');
 const xattr = require('fs-xattr');
 const fs = require('fs');
 const _ = require('lodash');
+const spawnSync = require('child_process').spawnSync;
 
 const used_flag = 'wprotate.used';
 
 const wallpaper_path = '/Users/cedric/img/wallpapers';
+const hooks_path = './hooks';
 
 const allWallpapers = fs.readdirSync(wallpaper_path)
     .map(x => `${wallpaper_path}/${x}`)
@@ -22,4 +24,13 @@ if (unusedWallpapers.length === 0) {
 const newWallpaper = _.sample(unusedWallpapers);
 wallpaper.set(newWallpaper).then(() => {
     xattr.setSync(newWallpaper, used_flag, '1');
+
+    const hooks = fs.readdirSync(hooks_path)
+        .map(x => `${hooks_path}/${x}`);
+
+    hooks.forEach(x => spawnSync(
+        'sh',
+        [x, newWallpaper],
+        {stdio: 'inherit'}
+    ));
 });
