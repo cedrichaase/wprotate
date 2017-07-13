@@ -1,12 +1,13 @@
 const wallpaper = require('wallpaper');
 const xattr = require('fs-xattr');
 const fs = require('fs');
+const os = require('os');
 const _ = require('lodash');
 const spawnSync = require('child_process').spawnSync;
 
 const used_flag = 'wprotate.used';
 
-const wallpaper_path = '/Users/cedric/img/wallpapers';
+const wallpaper_path = `${os.homedir()}/img/wallpapers`;
 const hooks_path = './hooks';
 
 const allWallpapers = fs.readdirSync(wallpaper_path)
