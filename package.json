@@ -10,7 +10,7 @@
   "license": "GPL-2.0",
   "dependencies": {
     "fs-xattr": "^0.1.15",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.16",
     "wallpaper": "^2.4.0"
   }
 }
